@@ -18,16 +18,17 @@ class Product:
 
 
     def get_quantity(self):
-        """Gets product quantity from user"""
-        quantity_input = input("Please enter quantity: ")
-        return quantity_input
+        """Returns the current quantity of the product"""
+        return self.quantity
 
 
     def set_quantity(self, quantity):
         """Sets product quantity for the instance variable"""
         self.quantity = quantity
         if self.quantity <= 0:
-            self.active = False
+            self.deactivate()
+        else:
+            self.activate()
 
 
     def is_active(self):
@@ -62,7 +63,5 @@ class Product:
         elif quantity > self.quantity:
             raise Exception(f"Unfortunately, there are only {self.quantity} {self.name}s in the store")
         total_price = quantity * self.price
-        self.quantity -= quantity
-        if self.quantity <= 0:
-            Product.deactivate(self)
+        self.set_quantity(self.quantity - quantity)
         return total_price

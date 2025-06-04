@@ -21,11 +21,11 @@ class Store:
     def get_total_quantity(self):
         """Goes through list of products and returns the total
         quantity of products in the store"""
-        total_products = 0
+        total_products = []
         for product in self.list_of_products:
-            partial_quantity = product.quantity
-            total_products += partial_quantity
-        return total_products
+            if product.is_active():
+                total_products.append(product.get_quantity())
+        return sum(total_products)
 
 
     def get_all_products(self):
@@ -33,7 +33,7 @@ class Store:
         active products (quantity > 0)"""
         active_products = []
         for product in self.list_of_products:
-            if product.active:
+            if product.is_active():
                 active_products.append(product)
         return active_products
 
@@ -42,9 +42,7 @@ class Store:
         """Receives a list of tuples as argument, calculates the prices for each
         quantity of product being ordered, and returns the total price of the order"""
         total_price = 0
-        for name, quantity in shopping_list:
-            for product in self.list_of_products:
-                if product == name and product.active:
-                    partial_price = product.price * quantity
-                    total_price += partial_price
+        for product, quantity in shopping_list:
+            if product.is_active():
+                total_price += product.buy(quantity)
         return f"Order made! Total payment: ${total_price}"

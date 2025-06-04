@@ -35,7 +35,7 @@ def start(store_name):
                 shopping_list = []
                 counter = 1
                 for product in store_name.get_all_products():
-                    print(f"{counter}. {product.name}, Price: ${product.price}, Quantity: {product.quantity}")
+                    product.show()
                     counter += 1
 
                 print("\nWhen you want to finish your order, enter empty text.\n")
