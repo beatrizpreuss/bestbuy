@@ -10,6 +10,7 @@ best_buy = store.Store(product_list)
 
 
 def start(store_name):
+    """Creates user interface and executes user choices"""
     while True:
         try:
             print("\n------- Store Menu -------\n"

@@ -1,47 +1,50 @@
-import products
 
 class Store:
+    """A class to represent stores that contain products. Provides methods to
+    add and remove products to the inventory, check products and quantity, and
+    make an order"""
 
     def __init__(self, list_of_products):
         self.list_of_products = list_of_products
 
+
     def add_product(self, product):
+        """Adds product to instance variable (list_of_products)"""
         self.list_of_products.append(product)
 
+
     def remove_product(self, product):
+        """Removes product to instance variable (list_of_products)"""
         self.list_of_products.remove(product)
 
+
     def get_total_quantity(self):
+        """Goes through list of products and returns the total
+        quantity of products in the store"""
         total_products = 0
         for product in self.list_of_products:
             partial_quantity = product.quantity
             total_products += partial_quantity
         return total_products
 
+
     def get_all_products(self):
+        """Goes through list of products, and returns a list with the
+        active products (quantity > 0)"""
         active_products = []
         for product in self.list_of_products:
             if product.active:
                 active_products.append(product)
         return active_products
 
+
     def order(self, shopping_list):
+        """Receives a list of tuples as argument, calculates the prices for each
+        quantity of product being ordered, and returns the total price of the order"""
         total_price = 0
         for name, quantity in shopping_list:
             for product in self.list_of_products:
                 if product == name and product.active:
                     partial_price = product.price * quantity
                     total_price += partial_price
-        return f"Order cost: {total_price} dollars."
-
-
-bose = products.Product("Bose QuietComfort Earbuds", price=250, quantity=500)
-mac = products.Product("MacBook Air M2", price=1450, quantity=100)
-
-# instance of a store
-best_buy = Store([bose, mac])
-
-pixel = products.Product("Google Pixel 7", price=500, quantity=250)
-best_buy.add_product(pixel)
-
-best_buy.order([(bose, 5), (mac, 30), (bose, 10)])
+        return f"Order made! Total payment: ${total_price}"

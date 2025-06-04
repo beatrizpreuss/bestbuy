@@ -1,5 +1,8 @@
 
 class Product:
+    """A class to represent products. Provides methods to get and set quantity,
+    check if active, activate and deactivate, and buy product"""
+
     def __init__(self, name, price, quantity):
         self.name = name
         self.price = price
@@ -15,36 +18,45 @@ class Product:
 
 
     def get_quantity(self):
+        """Gets product quantity from user"""
         quantity_input = input("Please enter quantity: ")
         return quantity_input
 
 
     def set_quantity(self, quantity):
+        """Sets product quantity for the instance variable"""
         self.quantity = quantity
         if self.quantity <= 0:
             self.active = False
 
 
     def is_active(self):
+        """Checks the instance variable (active)"""
         if self.active:
             return True
         else:
             return False
 
+
     def activate(self):
+        """Changes instance variable (active) to True"""
         self.active = True
 
+
     def deactivate(self):
+        """Changes instance variable (active) to False"""
         self.active = False
 
+
     def show(self):
+        """Prints product info"""
         print(f"{self.name}, Price: {self.price}, Quantity: {self.quantity}")
+
 
     def buy(self, quantity):
         """Buys a given quantity of the product.
-        Returns the total price (float) of the purchase.
-        Updates the quantity of the product.
-        In case of a problem (when? think about it), raises an Exception."""
+        Returns the total price of the purchase.
+        Updates the quantity of the product"""
         if quantity <= 0:
             raise Exception("Please choose valid quantity")
         elif quantity > self.quantity:
@@ -54,4 +66,3 @@ class Product:
         if self.quantity <= 0:
             Product.deactivate(self)
         return total_price
-
