@@ -1,0 +1,57 @@
+
+class Product:
+    def __init__(self, name, price, quantity):
+        self.name = name
+        self.price = price
+        self.quantity = quantity
+        self.active = True
+
+        if name == "":
+            raise Exception("Please name your product")
+        elif price < 0:
+            raise Exception("Price cannot be negative")
+        elif quantity < 0:
+            raise Exception("Quantity cannot be negative")
+
+
+    def get_quantity(self):
+        quantity_input = input("Please enter quantity: ")
+        return quantity_input
+
+
+    def set_quantity(self, quantity):
+        self.quantity = quantity
+        if self.quantity <= 0:
+            self.active = False
+
+
+    def is_active(self):
+        if self.active:
+            return True
+        else:
+            return False
+
+    def activate(self):
+        self.active = True
+
+    def deactivate(self):
+        self.active = False
+
+    def show(self):
+        print(f"{self.name}, Price: {self.price}, Quantity: {self.quantity}")
+
+    def buy(self, quantity):
+        """Buys a given quantity of the product.
+        Returns the total price (float) of the purchase.
+        Updates the quantity of the product.
+        In case of a problem (when? think about it), raises an Exception."""
+        if quantity <= 0:
+            raise Exception("Please choose valid quantity")
+        elif quantity > self.quantity:
+            raise Exception(f"Unfortunately, there are only {self.quantity} {self.name}s in the store")
+        total_price = quantity * self.price
+        self.quantity -= quantity
+        if self.quantity <= 0:
+            Product.deactivate(self)
+        return total_price
+
