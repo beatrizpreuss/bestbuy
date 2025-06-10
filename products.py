@@ -50,8 +50,8 @@ class Product:
 
 
     def show(self):
-        """Prints product info"""
-        print(f"{self.name}, Price: {self.price}, Quantity: {self.quantity}")
+        """Returns product info"""
+        return f"{self.name}, Price: {self.price}, Quantity: {self.quantity}"
 
 
     def buy(self, quantity):
@@ -59,9 +59,10 @@ class Product:
         Returns the total price of the purchase.
         Updates the quantity of the product"""
         if quantity <= 0:
-            raise Exception("Please choose valid quantity")
+            print("Please choose valid quantity")
         elif quantity > self.quantity:
-            raise Exception(f"Unfortunately, there are only {self.quantity} {self.name}s in the store")
-        total_price = quantity * self.price
-        self.set_quantity(self.quantity - quantity)
-        return total_price
+            print(f"Unfortunately, there are only {self.quantity} {self.name}s in the store")
+        else:
+            total_price = quantity * self.price
+            self.set_quantity(self.quantity - quantity)
+            return total_price

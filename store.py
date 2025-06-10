@@ -42,7 +42,9 @@ class Store:
         """Receives a list of tuples as argument, calculates the prices for each
         quantity of product being ordered, and returns the total price of the order"""
         total_price = 0
-        for product, quantity in shopping_list:
-            if product.is_active():
-                total_price += product.buy(quantity)
-        return f"Order made! Total payment: ${total_price}"
+        try:
+            for product, quantity in shopping_list:
+                    total_price += product.buy(quantity)
+            return f"Order made! Total payment: ${total_price}"
+        except TypeError:
+            return "Please try again"

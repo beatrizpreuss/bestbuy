@@ -35,8 +35,9 @@ def start(store_name):
                 shopping_list = []
                 counter = 1
                 for product in store_name.get_all_products():
-                    product.show()
+                    print(f"{counter}. {product.show()}")
                     counter += 1
+                print(shopping_list)
 
                 print("\nWhen you want to finish your order, enter empty text.\n")
 
@@ -46,7 +47,7 @@ def start(store_name):
                     print("")
                     if product_choice == "" and quantity_choice == "":
                         break
-                    shopping_list.append((product_list[int(product_choice) - 1], int(quantity_choice)))
+                    shopping_list.append((store_name.get_all_products()[int(product_choice) - 1], int(quantity_choice)))
                 print(store_name.order(shopping_list))
 
             elif user_choice == 4:
